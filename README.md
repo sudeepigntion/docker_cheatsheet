@@ -79,4 +79,57 @@
 36. To create a new network
 	docker network create mongodb
 
-37. 	
+Docker compose example
+
+Basic example
+
+# docker-compose.yml
+version: '2'
+
+services:
+  web:
+    build:
+    # build from Dockerfile
+      context: ./Path
+      dockerfile: Dockerfile
+    ports:
+     - "5000:5000"
+    volumes:
+     - .:/code
+  redis:
+    image: redis
+
+commands
+
+docker-compose start
+docker-compose stop
+docker-compose pause
+docker-compose unpause
+docker-compose ps
+docker-compose up
+docker-compose down
+
+
+Docker volume
+
+1. To list all volume in docker
+	sudo docker volume ls 
+
+2. Create a new volume
+	sudo docker volume create sample_volume	
+
+3. Inspect volume
+	sudo docker volume inspect sample_volume
+
+4. Mounting docker volume
+	sudo docker run -it -v sample_volume:/shared-volume --name my-container-01 ubuntu	
+
+5. Create a file inside docker volume
+	ls
+	cd /shared-volume
+	echo "sample_volume" > sample_volume.txt
+	ls
+	exit
+
+6. Create another container and mount the volume
+	sudo docker run -it -v sample_volume:/shared-volume --name my-container-02 ubuntu
